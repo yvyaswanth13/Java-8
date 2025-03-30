@@ -191,7 +191,14 @@ In this example:
                                      .map(String::toUpperCase)
                                      .collect(Collectors.toList());
   // Output: [ALICE, BOB]
-  
+The :: operator in Java is called the method reference operator. It is used to refer to a method without executing it.
+
+String::toUpperCase Explanation
+String::toUpperCase is a method reference to the toUpperCase() method of the String class.
+It is equivalent to writing str -> str.toUpperCase() in a lambda expression.
+Function<Double, Double> sqrtFunc = Math::sqrt; // Equivalent to x -> Math.sqrt(x)
+
+
 
 - flatMap: Transforms each element into a stream and flattens the resulting streams into a single stream.
   java
