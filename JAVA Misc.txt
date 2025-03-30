@@ -1,0 +1,9 @@
+In Java, interface methods can be of the following types:
+
+Abstract Methods: These methods do not have a body and must be implemented by the classes that implement the interface. By default, all methods in an interface were abstract before Java 8.
+
+Default Methods: Introduced in Java 8, these methods have a body and provide a default implementation. Classes that implement the interface can override these methods if needed.
+
+Static Methods: Also introduced in Java 8, these methods belong to the interface and cannot be overridden by implementing classes. They are called on the interface itself, not on instances of the interface.
+
+Private Methods: Introduced in Java 9, these methods are used to share code between default methods. They cannot be accessed outside the interface.

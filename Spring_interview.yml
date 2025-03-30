@@ -1,0 +1,153 @@
+IVC:
+
+In the context of Spring, the IoC container is the core component that manages the lifecycle and configuration of application objects.
+
+Dependency Injection (DI): The IoC container supports dependency injection, which allows the container to inject dependencies into objects at runtime rather than the objects creating dependencies themselves.
+
+types:
+Beanfactory and application Context;
+
+Certainly! Here are some common Spring interview questions along with their answers, covering a range of topics within the Spring framework:
+
+### Core Spring
+
+1.  What is Spring Framework? 
+   -  Answer : The Spring Framework is an open-source application framework for Java. It provides comprehensive infrastructure support for developing Java applications. It simplifies enterprise Java development and promotes good programming practices by providing solutions to commonly encountered problems in enterprise applications.
+
+2.  What are the advantages of using Spring Framework? 
+   -  Answer : 
+     -  Dependency Injection : Promotes loose coupling.
+     -  Aspect-Oriented Programming (AOP) : Modularizes cross-cutting concerns.
+     -  Transaction Management : Simplifies transaction management.
+     -  MVC Framework : Provides a powerful MVC web framework.
+     -  Integration : Integrates well with other frameworks and technologies like JPA, Hibernate, and JMS.
+
+3.  What are the different modules in Spring Framework? 
+   -  Answer : Core Container (Spring Core, Spring Beans, Spring Context, Spring Expression Language), Data Access/Integration (JDBC, ORM, OXM, JMS, Transaction), Web (Web, Web-Servlet, Web-Struts, Web-Portlet), AOP (Aspect-Oriented Programming), Instrumentation, and Test.
+
+4.  What is Dependency Injection (DI)? 
+   -  Answer : Dependency Injection is a design pattern where an object's dependencies are injected rather than being created by the object itself. In Spring, DI can be achieved through constructor injection, setter injection, or field injection.
+
+5.  What is Inversion of Control (IoC)? 
+   -  Answer : Inversion of Control is a principle where the control of object creation and lifecycle management is transferred from the application code to the IoC container. In Spring, the IoC container manages the dependencies and configurations of the objects.
+
+### Spring Core
+
+6.  Explain the different types of IoC containers in Spring. 
+   -  Answer : 
+     -  BeanFactory : The simplest container providing basic DI capabilities.
+     -  ApplicationContext : A more advanced container that extends BeanFactory and provides additional features like event propagation, declarative mechanisms to create a bean, and various means to look up.
+
+7.  What are the bean scopes in Spring? 
+   -  Answer : 
+     -  singleton : Single bean instance per Spring IoC container.
+     -  prototype : New bean instance every time requested.
+     -  request : Single bean instance per HTTP request.
+     -  session : Single bean instance per HTTP session.
+     -  application : Single bean instance per ServletContext.
+     -  websocket : Single bean instance per WebSocket.
+
+8.  How do you define a Spring bean? 
+   -  Answer : A Spring bean can be defined in XML configuration using `<bean>` tags or using annotations like `@Component`, `@Service`, `@Repository`, or `@Controller`.
+
+9.  What is the difference between `@Component`, `@Service`, `@Repository`, and `@Controller`? 
+   -  Answer : 
+     -  @Component : Generic stereotype for any Spring-managed component.
+     -  @Service : Specialization of `@Component` for service layer beans.
+     -  @Repository : Specialization of `@Component` for DAO (Data Access Object) layer beans, adding support for persistence exceptions.
+     -  @Controller : Specialization of `@Component` for Spring MVC controllers.
+
+10.  What is the difference between constructor injection and setter injection? 
+    -  Answer : 
+      -  Constructor Injection : Dependencies are injected through the constructor. It ensures that the object is created with all its dependencies.
+      -  Setter Injection : Dependencies are injected through setter methods. It allows partial or optional dependencies to be set after the object is created.
+
+### Spring AOP
+
+11.  What is Aspect-Oriented Programming (AOP)? 
+    -  Answer : AOP is a programming paradigm that allows separation of cross-cutting concerns (like logging, security, transaction management) from the main business logic. In Spring, AOP can be implemented using aspects, advice, pointcuts, and join points.
+
+12.  What are the different types of advice in Spring AOP? 
+    -  Answer : 
+      -  Before Advice : Executes before the join point method.
+      -  After Advice : Executes after the join point method completes.
+      -  After Returning Advice : Executes after the join point method returns a value.
+      -  After Throwing Advice : Executes if the join point method throws an exception.
+      -  Around Advice : Wraps the join point method, allowing custom behavior before and after the method execution.
+
+13.  What is a pointcut in Spring AOP? 
+    -  Answer : A pointcut is an expression that matches join points. It defines where advice should be applied. Pointcut expressions can be based on method names, annotations, or other criteria.
+
+14.  What is a join point in Spring AOP? 
+    -  Answer : A join point is a point during the execution of a program, such as the execution of a method or the handling of an exception. In Spring AOP, a join point always represents a method execution.
+
+15.  What is weaving in Spring AOP? 
+    -  Answer : Weaving is the process of applying aspects to the target objects to create advised objects. Weaving can occur at compile time, load time, or runtime.
+
+### Spring Data Access
+
+16.  What is Spring JDBC? 
+    -  Answer : Spring JDBC provides a set of JDBC abstractions to simplify database access and reduce the amount of boilerplate code. It includes `JdbcTemplate` and related classes to handle common database operations.
+
+17.  What is `JdbcTemplate`? 
+    -  Answer : `JdbcTemplate` is a central class in Spring JDBC that simplifies database interaction. It provides methods for executing SQL queries, updates, and stored procedures, and for handling exceptions.
+
+18.  What is Spring ORM? 
+    -  Answer : Spring ORM module provides integration with ORM frameworks like Hibernate, JPA, and JDO. It simplifies the configuration and usage of these frameworks in a Spring application.
+
+19.  What is the difference between `@Transactional` and programmatic transaction management? 
+    -  Answer : 
+      -  @Transactional : Declarative transaction management using annotations. It allows transaction boundaries to be defined declaratively.
+      -  Programmatic Transaction Management : Transactions are managed programmatically in the code using `TransactionTemplate` or `PlatformTransactionManager`.
+
+20.  What is the `PlatformTransactionManager`? 
+    -  Answer : `PlatformTransactionManager` is an interface in Spring that provides a consistent way to manage transactions across different transaction management APIs like JDBC, JPA, and JMS.
+
+### Spring MVC
+
+21.  What is Spring MVC? 
+    -  Answer : Spring MVC is a web framework within the Spring Framework that follows the Model-View-Controller (MVC) design pattern. It provides a robust infrastructure for building web applications and includes features like data binding, validation, and form handling.
+
+22.  What is the role of `DispatcherServlet` in Spring MVC? 
+    -  Answer : `DispatcherServlet` is the front controller in Spring MVC. It handles all incoming HTTP requests, dispatches them to the appropriate controllers, and manages the request handling lifecycle.
+
+23.  What are the annotations used in Spring MVC? 
+    -  Answer : 
+      - `@Controller`: Marks a class as a Spring MVC controller.
+      - `@RequestMapping`: Maps HTTP requests to handler methods.
+      - `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`: Specialized forms of `@RequestMapping` for specific HTTP methods.
+      - `@RequestParam`: Binds request parameters to method parameters.
+      - `@PathVariable`: Binds URI template variables to method parameters.
+      - `@ModelAttribute`: Binds a method parameter or return value to a named model attribute.
+      - `@ResponseBody`: Indicates that the return value of a method should be used as the response body.
+
+24.  What is the `ModelAndView` in Spring MVC? 
+    -  Answer : `ModelAndView` is a class in Spring MVC that holds both the model and the view. The model is a map of attributes to be rendered, and the view is the name of the view to be rendered.
+
+25.  What is the `@RestController` annotation? 
+    -  Answer : `@RestController` is a specialized version of `@Controller` that combines `@Controller` and `@ResponseBody`. It is used to create RESTful web services, where the return value of each method is written directly to the HTTP response body in JSON or XML format.
+
+### Spring Boot
+
+26.  What is Spring Boot? 
+    -  Answer : Spring Boot is a project within the Spring ecosystem that simplifies the development of production-ready Spring applications. It provides convention over configuration, embedded servers, and starter dependencies to reduce the amount of boilerplate code.
+
+27.  What are Spring Boot starters? 
+    -  Answer : Spring Boot starters are a set of convenient dependency descriptors that you can include in your project. They simplify dependency management by providing pre-configured sets of libraries for various functionalities (e.g., `spring-boot-starter-web`, `spring-boot-starter-data-jpa`).
+
+28.  What is Spring Boot Auto-Configuration? 
+    -  Answer : Spring Boot auto-configuration automatically configures your Spring application based on the dependencies present on the classpath. It reduces
+
+ the need for manual configuration and enables rapid application development.
+
+29.  What is Spring Boot Actuator? 
+    -  Answer : Spring Boot Actuator provides a set of built-in endpoints for monitoring and managing your application. It includes endpoints for health checks, metrics, environment properties, and more.
+
+30.  How do you create a Spring Boot application? 
+    -  Answer : 
+      - Use the Spring Initializr (https://start.spring.io/) to generate a new project.
+      - Add the `@SpringBootApplication` annotation to the main application class.
+      - Use the `spring-boot-starter` dependencies to add functionality.
+      - Run the application using `SpringApplication.run(Application.class, args)`.
+
+These questions and answers should provide a comprehensive overview of the key concepts and features of the Spring framework and help you prepare for a Spring-related interview.

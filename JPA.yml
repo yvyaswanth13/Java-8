@@ -1,0 +1,223 @@
+In Spring Data JPA and Hibernate, entity annotations are used to map Java objects to database tables. Here are the key annotations and their usage
+
+Life Cycle of Hibernate Object->Transient->Persistant`->detached-GC :
+Object-Transient->GC
+object-Persistent-Removed->GC
+Object-Persistant`-Detached-GC
+Refer Spring Hibernate whats app GRP 
+
+
+### Basic Entity Annotations
+
+#### @Entity
+- Marks a class as a JPA entity.
+- Example:
+  ```java
+  @Entity
+  public class User {
+      @Id
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
+      private Long id;
+
+      private String firstName;
+      private String lastName;
+
+      // Getters and setters
+  }
+  ```
+
+#### @Table
+- Specifies the table in the database to which the entity is mapped. If not specified, the table name defaults to the entity class name.
+- Example:
+  ```java
+  @Entity
+  @Table(name = "users")
+  public class User {
+      @Id
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
+      private Long id;
+
+      private String firstName;
+      private String lastName;
+
+      // Getters and setters
+  }
+  ```
+
+#### @Id
+- Specifies the primary key of the entity.
+- Example:
+  ```java
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  ```
+
+#### @GeneratedValue
+- Specifies how the primary key should be generated.
+- Example:
+  ```java
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  ```
+
+-----------------------------------------------### Column Annotations-----------------------------------------------------
+
+#### @Column
+- Specifies the column in the database to which a field is mapped. If not specified, the column name defaults to the field name.
+- Example:
+  ```java
+  @Column(name = "first_name")
+  private String firstName;
+  ```
+
+#### @Temporal
+- Specifies the temporal type (e.g., DATE, TIME, TIMESTAMP) for a `java.util.Date` or `java.util.Calendar` field.
+- Example:
+  ```java
+  @Temporal(TemporalType.DATE)
+  private Date birthDate;
+  ```
+
+#### @Enumerated
+- Specifies that a persistent property or field should be persisted as an enumerated type.
+- Example:
+  ```java
+  @Enumerated(EnumType.STRING)
+  private Gender gender;
+  ```
+
+-------------------------------------------------------------### Relationship Annotations------------------------------------------------------
+
+#### @OneToOne
+- Specifies a one-to-one relationship between two entities.
+- Example:
+  ```java
+  @OneToOne
+  @JoinColumn(name = "profile_id")
+  private Profile profile;
+  ```
+
+#### @OneToMany
+- Specifies a one-to-many relationship between two entities.
+- Example:
+  ```java
+  @OneToMany(mappedBy = "user")
+  private List<Order> orders;
+  ```
+
+#### @ManyToOne
+- Specifies a many-to-one relationship between two entities.
+- Example:
+  ```java
+  @ManyToOne
+  @JoinColumn(name = "department_id")
+  private Department department;
+  ```
+
+#### @ManyToMany(Student ,Student_course(joined table), Course)
+- Specifies a many-to-many relationship between two entities.
+- Example:
+  ```java
+  @ManyToMany
+  @JoinTable(
+      name = "user_roles",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "role_id")
+  )
+  private Set<Role> roles;
+  ```
+
+---------------------------------------------------------------### Inheritance Annotations---------------------------------------------
+
+#### @Inheritance
+- Specifies the inheritance strategy for an entity class hierarchy.
+- Example:
+  ```java
+  @Inheritance(strategy = InheritanceType.JOINED)
+  ```
+
+#### @DiscriminatorColumn
+- Specifies the column used to differentiate between entity types in a single table inheritance strategy.
+- Example:
+  ```java
+  @DiscriminatorColumn(name = "type")
+  ```
+
+----------------------------------------------------------------### Additional Annotations-----------------------------------------------------------
+
+#### @Transient
+- Specifies that a field is not to be persisted in the database.
+- Example:
+  ```java
+  @Transient
+  private String temporaryData;
+  ```
+
+#### @Lob
+- Specifies that a persistent property or field should be persisted as a large object (LOB).
+- Example:
+  ```java
+  @Lob
+  private byte[] data;
+  ```
+
+#### @Version
+- Specifies a field used for optimistic locking.
+- Example:
+  ```java
+  @Version
+  private Integer version;
+  ```
+
+------------------------------------------------------### Example Entity Class---------------------------------------------------------
+
+Here is an example of an entity class using some of the annotations mentioned above:
+
+```java
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birth_date")
+    private Date birthDate;
+
+    @OneToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
+
+    @ManyToMany
+    @JoinTable(
+        name = "user_roles",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
+
+    @Transient
+    private String temporaryData;
+
+    @Version
+    private Integer version;
+
+    // Getters and setters
+}
+```
+
+This example demonstrates a variety of annotations to define an entity class, mapping it to a database table and specifying relationships and other properties.
