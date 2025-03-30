@@ -1,6 +1,6 @@
 Here’s a concise summary of the Stream API methods in Java 8, including examples for each:
 
-### Stream Creation
+>> Stream Creation
 - -stream(): Sequential stream from a collection.
   java
   List<String> list = Arrays.asList("a", "b", "c");
@@ -12,7 +12,7 @@ Here’s a concise summary of the Stream API methods in Java 8, including exampl
   Stream<String> parallelStream = list.parallelStream();
   
 
-### Intermediate Operations
+>> Intermediate Operations
 - -filter(Predicate<? super T> predicate): Filters elements based on a predicate.
   java
   Stream<String> filteredStream = stream.filter(s -> s.startsWith("a"));
@@ -38,12 +38,12 @@ Here’s a concise summary of the Stream API methods in Java 8, including exampl
     }
 	The map method in the Stream API is used to transform each element of the stream into another form. This transformation is done by applying a function to each element. The map method is particularly useful when you need to convert the elements of the stream into a different type or need to apply a specific operation to each element.
 
-### Example Explanation: Stream<Integer> lengthStream = stream.map(String::length);
+>> Example Explanation: Stream<Integer> lengthStream = stream.map(String::length);
 
-#### Scenario
+>># Scenario
 Suppose you have a list of strings and you want to create a list of their lengths. This is a common scenario where you need to transform a list of one type (String) into a list of another type (Integer).
 
-#### Example
+>># Example
 java
 import java.util.Arrays;
 import java.util.List;
@@ -66,12 +66,12 @@ public class MapExample {
 }
 
 
-### When to Use map
+>> When to Use map
 - Type Conversion: When you need to convert each element of the stream from one type to another. For example, converting a list of strings to a list of their lengths.
 - Applying Functions: When you need to apply a specific function to each element in the stream. For example, converting strings to uppercase.
 - Extracting Information: When you need to extract a specific property from objects. For example, extracting the names of employees from a list of Employee objects.
 
-### Common Use Cases
+>> Common Use Cases
 1. Transforming Data: Converting a list of objects to a list of a specific attribute.
    java
    List<Person> people = Arrays.asList(new Person("John", 25), new Person("Jane", 30));
@@ -102,25 +102,25 @@ In summary, the map method is essential when you need to transform the elements 
   
   Certainly! The flatMap method can be a bit tricky to understand at first, especially when compared to map. Here’s a detailed explanation to help clarify how flatMap works and when to use it.
 
-### Understanding flatMap
+>> Understanding flatMap
 
 The flatMap method is used in the Stream API to flatten a stream of collections or multiple values into a single stream. It transforms each element of the stream into another stream and then combines all the resulting streams into one.
 
-#### How flatMap Works
+>># How flatMap Works
 
 1. Transformation: Each element of the original stream is transformed into a new stream of elements.
 2. Flattening: The resulting streams are then flattened into a single stream.
 
 This is different from map, which transforms each element into a different form but keeps the result as a stream of streams.
 
-### When to Use flatMap
+>> When to Use flatMap
 
 - Nested Collections: When you have a stream of collections (e.g., a list of lists) and you want to flatten it into a single collection.
 - Multiple Values: When transforming elements into multiple values and you want a single stream of those values.
 
-### Examples
+>> Examples
 
-#### Example 1: Flattening a List of Lists
+>># Example 1: Flattening a List of Lists
 
 Suppose you have a List<List<Integer>> and you want to flatten it into a List<Integer>.
 
@@ -150,7 +150,7 @@ In this example:
 - List::stream converts each List<Integer> into a Stream<Integer>.
 - flatMap then flattens these streams into a single Stream<Integer>.
 
-#### Example 2: Splitting Strings into Words
+>># Example 2: Splitting Strings into Words
 
 Suppose you have a List<String> where each string is a sentence, and you want to create a List<String> of all words.
 
@@ -181,7 +181,7 @@ In this example:
 - Arrays.stream(...) converts this array into a stream of words.
 - flatMap flattens these streams of words into a single stream.
 
-### Key Differences from map
+>> Key Differences from map
 
 - map: Transforms each element into a new form but maintains a stream of transformed elements.
   java
@@ -206,7 +206,7 @@ In this example:
   // Output: [a, b, c, d]
   
 
-### Summary
+>> Summary
 
 - map: Applies a function to each element and keeps the result as a stream of transformed elements.
 - flatMap: Applies a function that returns a stream for each element and then flattens all the resulting streams into a single stream.
@@ -244,7 +244,7 @@ Understanding flatMap becomes easier with practice. It’s especially useful for
   Stream<String> skippedStream = stream.skip(1);
   
 
-### Terminal Operations
+>> Terminal Operations
 - forEach(Consumer<? super T> action): Performs an action on each element.
   java
   stream.forEach(System.out::println);
