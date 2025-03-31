@@ -19,7 +19,80 @@ public class LambdaExample {
 }
 
 
-**Exercise: Create a functional interface and use a lambda expression**
+2)  Functional Interface: A Functional Interface is an interface that contains only one abstract method. However, it can have multiple default and static methods.
+
+Best Example:
+---------------------------------
+interface Runnable
+void run()
+}
+ Runnable task = () -> System.out.println("Thread is running with Lambda!");
+   Thread t = new Thread(task);
+        t.start();
+--------------------------------------------------
+@FunctionalInterface
+public interface Comparator<T> {
+    int compare(T o1, T o2); // Abstract method (Functional Interface)
+}
+
+Comparator using Lambda(Java 8):
+Collections.sort(list, (s1, s2) -> s1.compareTo(s2));
+
+Before Java 8:
+class NameComparator implements Comparator<String> {
+    @Override
+    public int compare(String s1, String s2) {
+        return s1.compareTo(s2);
+    }
+}
+Collections.sort(list, new NameComparator());
+----------------------------------------------------------
+Some more Java Functional Inteface introduced in Java 8:
+----------------------------------------------------------
+Fun.Interface	Abstract Method	    Purpose
+Predicate<T>	boolean test(T t)	Returns true or false (Used for filtering)
+Function<T, R>	R apply(T t)	    Takes one input, returns a result
+Consumer<T>    	void accept(T t)	Takes one input, performs an action, no return
+Supplier<T>	    T get()	            Returns a value, takes no input
+
+From Package: import java.util.function.Predicate;
+Examples of Each:
+public class PredicateExample {
+    public static void main(String[] args) {
+        Predicate<Integer> isEven = num -> num % 2 == 0;
+
+        System.out.println(isEven.test(4)); // Output: true
+        System.out.println(isEven.test(7)); // Output: false
+    }
+    
+-Using Function (Converts Integer to String)
+import java.util.function.Function;
+
+public class FunctionExample {
+    public static void main(String[] args) {
+        Function<Integer, String> intToString = num -> "Number: " + num;
+
+        System.out.println(intToString.apply(10)); // Output: Number: 10
+    }
+}
+ -  Using Consumer (Prints a Value)
+ public static void main(String[] args) {
+        Consumer<String> printMessage = msg -> System.out.println("Hello, " + msg);
+
+        printMessage.accept("Java!"); // Output: Hello, Java!
+    }
+
+ -Using Supplier (Generates Random Value)
+import java.util.function.Supplier;
+import java.util.Random;
+
+public class SupplierExample {
+    public static void main(String[] args) {
+        Supplier<Integer> getRandomNumber = () -> new Random().nextInt(100);
+
+        System.out.println(getRandomNumber.get()); // Output: (Random Number)
+    }
+}
 
 java
 @FunctionalInterface
@@ -35,7 +108,7 @@ public class FunctionalInterfaceExample {
 }
 
 
-### 2. Functional Interfaces and Default Methods
+
 
 **Exercise: Custom functional interface**
 
@@ -52,6 +125,8 @@ public class CustomFunctionalInterfaceExample {
     }
 }
 
+3) Default & Static Methods.:
+
 Static Methods:Use static methods when a method does not depend on instance variables and acts like a utility method.
 Default Methods: Default methods help evolve interfaces without breaking backward compatibility.
     or
@@ -59,6 +134,7 @@ Default methods are methods defined in an interface with an implementation.
 They allow you to add new methods to an interface without breaking compatibility with existing classes that implement the interface. 
 Default methods provide a way to extend interfaces without forcing all implementing classes to provide implementations for the new methods.
     Reasons: The introduction of default and static methods in Java 8 was primarily to enhance the Collections Framework without breaking backward compatibility.
+
 Example: Static Methods in Collections
 Before Java 8, utility methods like sort() were in Collections class, not in the interfaces.
 Comparator<String> comparator = Comparator.naturalOrder();  // Static method in interface
