@@ -1,3 +1,13 @@
+->Convert array to stream is diff:
+ String[] res = {"ball", "billy", "between"};
+
+        // Convert array to stream, sort by length, and collect into a List
+        List<String> sortedList = Arrays.stream(res)
+            .sorted(Comparator.comparingInt(String::length))
+            .collect(Collectors.toList());
+
+        System.out.println(sortedList); // Output: [ball, billy, between]
+
 List<Employee> maxSalary = employees.stream()
     .filter(e -> e.salary > 5000)
     .collect(Collectors.toList());
@@ -22,3 +32,5 @@ List<Employee> sortedEmployees = employees.stream()
 List<Employee> sortedEmployees = employees.stream()
     .sorted(Comparator.comparingInt(e -> e.age))
     .collect(Collectors.toList());
+
+
