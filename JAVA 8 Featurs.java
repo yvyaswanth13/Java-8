@@ -4,7 +4,7 @@ Sure! Here are some examples and answers for the exercises mentioned:
 
 **Exercise: Sort a list of strings by their length**
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,11 +17,11 @@ public class LambdaExample {
         strings.forEach(System.out::println);
     }
 }
-```
+
 
 **Exercise: Create a functional interface and use a lambda expression**
 
-```java
+java
 @FunctionalInterface
 interface MyFunctionalInterface {
     void myMethod(String message);
@@ -33,13 +33,13 @@ public class FunctionalInterfaceExample {
         instance.myMethod("Hello, Lambda!");
     }
 }
-```
+
 
 ### 2. Functional Interfaces and Default Methods
 
 **Exercise: Custom functional interface**
 
-```java
+java
 @FunctionalInterface
 interface CustomFunctionalInterface {
     void execute();
@@ -51,14 +51,38 @@ public class CustomFunctionalInterfaceExample {
         instance.execute();
     }
 }
-```
 
-Exercise: Interface with a default method**
+Static Methods:Use static methods when a method does not depend on instance variables and acts like a utility method.
+Default Methods: Default methods help evolve interfaces without breaking backward compatibility.
+    or
+Default methods are methods defined in an interface with an implementation. 
+They allow you to add new methods to an interface without breaking compatibility with existing classes that implement the interface. 
+Default methods provide a way to extend interfaces without forcing all implementing classes to provide implementations for the new methods.
+    Reasons: The introduction of default and static methods in Java 8 was primarily to enhance the Collections Framework without breaking backward compatibility.
+Example: Static Methods in Collections
+Before Java 8, utility methods like sort() were in Collections class, not in the interfaces.
+Comparator<String> comparator = Comparator.naturalOrder();  // Static method in interface
+ List<String> names = Arrays.asList("John", "Alex", "Emma", "David");
 
-```java
+        // ✅ Using Default Method: forEach() in Iterable
+        names.forEach(name -> System.out.println("Name: " + name));
+
+        // ✅ Using Default Method: sort() in List
+        names.sort(Comparator.naturalOrder());
+        System.out.println("Sorted Names: " + names);
+
+        // ✅ Using Static Method: Comparator.reverseOrder()
+        names.sort(Comparator.reverseOrder());
+
+Exercise: Interface with a default & Static method**
+
+
 interface MyInterface {
     void normalMethod();
     
+     static int add(int a, int b) {
+        return a + b;
+    }
     default void defaultMethod() {
         System.out.println("This is a default method.");
     }
@@ -73,15 +97,51 @@ public class DefaultMethodExample implements MyInterface {
         DefaultMethodExample example = new DefaultMethodExample();
         example.normalMethod();
         example.defaultMethod();
+         int result = MyInterface.add(5, 3);
+        System.out.println(result);  // Output: 8
     }
 }
-```
+3️⃣ Default vs. Static Methods
+Feature	               | Default |Static Method|
+--------------------------------------------
+Defined in interface?	✅ Yes	✅ Yes
+Has implementation?	    ✅ Yes	✅ Yes
+Can be overridden?	    ✅ Yes	❌ No
+Called via object?	    ✅ Yes	❌ No (Only via interface name)
+Used for?	       Adding new    Utility/helper methods
+                functionality to interfaces	
 
+-->What Happens If a Class Implements Two Interfaces with the Same Default Method?
+
+If a class implements multiple interfaces that both have the same default method, Java forces the class to override the method to resolve ambiguity.
+interface A {
+    default void show() {
+        System.out.println("Interface A");
+    }
+}
+
+interface B {
+    default void show() {
+        System.out.println("Interface B");
+    }
+}
+class MyClass implements A, B {
+    public void show() {
+        System.out.println("Resolving conflict in MyClass");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyClass obj = new MyClass();
+        obj.show();  // Output: Resolving conflict in MyClass
+    }
+    
 ### 3. Streams API
 
 **Exercise: Filter, square, and collect**
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -98,11 +158,11 @@ public class StreamExample {
         System.out.println(evenSquares);
     }
 }
-```
+
 
 **Exercise: Count unique words in a text file**
 
-```java
+java
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -125,13 +185,13 @@ public class UniqueWordsExample {
         }
     }
 }
-```
+
 
 ### 4. Optional Class
 
 **Exercise: Using Optional methods**
 
-```java
+java
 import java.util.Optional;
 
 public class OptionalExample {
@@ -151,11 +211,11 @@ public class OptionalExample {
         return Optional.of("Hello, Optional!");
     }
 }
-```
+
 
 **Exercise: Handling null values in a list**
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -169,13 +229,13 @@ public class OptionalListExample {
                .forEach(opt -> opt.ifPresent(System.out::println));
     }
 }
-```
+
 
 ### 5. New Date and Time API
 
 **Exercise: Display the current date and time**
 
-```java
+java
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -187,11 +247,11 @@ public class DateTimeExample {
         System.out.println("Current date and time: " + now.format(formatter));
     }
 }
-```
+
 
 **Exercise: Parse and format a date**
 
-```java
+java
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -207,11 +267,11 @@ public class ParseFormatDateExample {
         System.out.println("Formatted date: " + formattedDate);
     }
 }
-```
+
 
 **Exercise: Calculate the difference between two dates**
 
-```java
+java
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -227,13 +287,13 @@ public class DateDifferenceExample {
                            period.getDays() + " days.");
     }
 }
-```
+
 
 ### 6. Method References
 
 **Exercise: Convert lambda to method reference**
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 
@@ -244,11 +304,11 @@ public class MethodReferenceExample {
         strings.forEach(System.out::println);
     }
 }
-```
+
 
 **Exercise: Method references in a comparator**
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 
@@ -261,13 +321,13 @@ public class MethodReferenceComparator {
         strings.forEach(System.out::println);
     }
 }
-```
+
 
 ### 7. Collectors
 
 **Exercise: Collect to a list**
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -283,11 +343,11 @@ public class CollectToListExample {
         System.out.println(evenNumbers);
     }
 }
-```
+
 
 **Exercise: Grouping by**
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -304,7 +364,7 @@ public class GroupingByExample {
             System.out.println("Length " + length + ": " + list));
     }
 }
-```
+
 
 These examples should give you a solid foundation in Java 8 features. Let me know if you have any questions or need further assistance!
 
@@ -315,7 +375,7 @@ Certainly! Here are some additional exercises to further practice Java 8 feature
 
 **Task:** Given a list of strings, transform each string to its length and then concatenate these lengths into a single string separated by hyphens.
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -333,13 +393,13 @@ public class Exercise1 {
         System.out.println(lengthString); // Expected Output: 5-5-4-7
     }
 }
-```
+
 
 ### Exercise 2: Partitioning Data
 
 **Task:** Given a list of integers, partition them into even and odd numbers, and print the result.
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -357,13 +417,13 @@ public class Exercise2 {
         System.out.println("Odd numbers: " + partitioned.get(false));
     }
 }
-```
+
 
 ### Exercise 3: Finding Unique Elements
 
 **Task:** Given a list of strings with possible duplicates, find all unique strings that contain more than 5 characters.
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -381,13 +441,13 @@ public class Exercise3 {
         System.out.println(uniqueLongWords); // Expected Output: [dragonfruit, banana]
     }
 }
-```
+
 
 ### Exercise 4: Calculating Statistics
 
 **Task:** Given a list of integers, calculate the average, minimum, and maximum values.
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -415,13 +475,13 @@ public class Exercise4 {
         System.out.println("Max: " + max.orElse(-1));
     }
 }
-```
+
 
 ### Exercise 5: Flattening and Collecting
 
 **Task:** Given a list of lists of strings, flatten them into a single list, sort the strings, and collect them into a new list.
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -443,13 +503,13 @@ public class Exercise5 {
         System.out.println(sortedFlattenedList); // Expected Output: [apple, banana, cherry, date, fig, grape]
     }
 }
-```
+
 
 ### Exercise 6: Using `Optional` for Default Values
 
 **Task:** Given a list of optional integers, find the first present value, and if none are present, return a default value.
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -472,13 +532,13 @@ public class Exercise6 {
         System.out.println(firstPresent); // Expected Output: 42
     }
 }
-```
+
 
 ### Exercise 7: Grouping and Aggregating
 
 **Task:** Given a list of people with their ages, group them by age and calculate the average age for each group.
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -523,13 +583,13 @@ public class Exercise7 {
         System.out.println(averageAgeByGroup); // Expected Output: {25=25.0, 30=30.0, 35=35.0}
     }
 }
-```
+
 
 ### Exercise 8: Custom Collector
 
 **Task:** Create a custom collector to concatenate a list of integers into a single string with each number separated by a comma.
 
-```java
+java
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collector;
@@ -554,7 +614,7 @@ public class Exercise8 {
         System.out.println(result); // Expected Output: 1,2,3,4,5
     }
 }
-```
+
 
 These exercises are designed to enhance your understanding of Java 8's functional programming features, particularly the Stream API, lambdas, and the `Optional` class.
 
@@ -568,37 +628,37 @@ There are four types of method references:
 1. **Reference to a static method**
    - **Syntax**: `ClassName::staticMethodName`
    - **Example**: 
-     ```java
+     java
      // Using a method reference to a static method
      Consumer<String> consumer = System.out::println;
-     ```
+     
 
 2. **Reference to an instance method of a particular object**
    - **Syntax**: `instance::instanceMethodName`
    - **Example**: 
-     ```java
+     java
      // Using a method reference to an instance method of a particular object
      MyClass myObject = new MyClass();
      Runnable r = myObject::instanceMethod;
-     ```
+     
 
 3. **Reference to an instance method of an arbitrary object of a particular type**
    - **Syntax**: `ClassName::instanceMethodName`
    - **Example**:
-     ```java
+     java
      // Using a method reference to an instance method of an arbitrary object
      Function<String, String> func = String::toUpperCase;
      List<String> words = Arrays.asList("hello", "world");
      words.stream().map(String::toUpperCase).forEach(System.out::println);
-     ```
+     
 
 4. **Reference to a constructor**
    - **Syntax**: `ClassName::new`
    - **Example**:
-     ```java
+     java
      // Using a method reference to a constructor
      Supplier<MyClass> supplier = MyClass::new;
-     ```
+     
 
 ### How to Decide When to Use Method References
 
@@ -628,30 +688,30 @@ Every method reference has an equivalent lambda expression. Here's how you can c
 
 1. **Static Method Reference**:
    - **Method Reference**: 
-     ```java
+     java
      List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
      numbers.forEach(System.out::println); // Equivalent to: numbers.forEach(n -> System.out.println(n));
-     ```
+     
 
 2. **Instance Method Reference of a Particular Object**:
    - **Method Reference**: 
-     ```java
+     java
      MyClass myObject = new MyClass();
      Runnable r = myObject::instanceMethod; // Equivalent to: Runnable r = () -> myObject.instanceMethod();
-     ```
+     
 
 3. **Instance Method Reference of an Arbitrary Object**:
    - **Method Reference**:
-     ```java
+     java
      List<String> strings = Arrays.asList("a", "b", "c");
      strings.stream().map(String::toUpperCase).forEach(System.out::println); // Equivalent to: strings.stream().map(s -> s.toUpperCase()).forEach(s -> System.out.println(s));
-     ```
+     
 
 4. **Constructor Reference**:
    - **Method Reference**:
-     ```java
+     java
      Supplier<MyClass> supplier = MyClass::new; // Equivalent to: Supplier<MyClass> supplier = () -> new MyClass();
-     ```
+     
 
 ### Summary
 - Use `::` for cleaner, more readable code when the method reference directly matches the required functional interface.
