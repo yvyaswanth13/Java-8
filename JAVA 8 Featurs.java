@@ -14,7 +14,7 @@ public class LambdaExample {
         
         strings.sort((s1, s2) -> Integer.compare(s1.length(), s2.length()));
         
-        strings.forEach(System.out::println);
+        strings.forEach(System.out::println); // :: Method reference java 8 Feature
     }
 }
 
